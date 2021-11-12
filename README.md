@@ -12,5 +12,6 @@ The script should be run as follows:
   Note: it's important that the given ID in the final input of the fgsea is HGNC (https://en.wikipedia.org/wiki/HUGO_Gene_Nomenclature_Committee ). 
 
 
+3 - Run MainScript_2_plotEnrichmentPlots_Hallmark.R to produce the enrichment plots seen in the paper. 
 
-3 - Run   MainScript_3_createOrderedHeatmaps.R to convert the csv outputs of the Hallmark/expression dataset fgsea into a heatmap. The results will be stored in the hallmark folder in its respective results folder. 
+4 - Run   MainScript_3_createOrderedHeatmaps.R to convert the csv outputs of the Hallmark/expression dataset fgsea into a heatmap. The results will be stored in the hallmark folder in its respective results folder. 

@@ -27,6 +27,8 @@ install.packages('tidyverse')
 install.packages('data.table')
 #ggplot2
 install.packages('ggplot2')
+#gplots
+install.packages('gplots')
 #readr
 install.packages('readr')
 

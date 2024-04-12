@@ -10,14 +10,15 @@
 #
 # Date created      : 20211110
 #
-# Summary           : Script that runs the FGSEA algorithm on  expressionDataset.txt and 
-# expressionDataset_NoCutoff.txt and outputs a csv with results for each run, as well as a sticks plot for the top
+# Summary           : Script that runs the FGSEA algorithm on  Data/TregvsTconv_Thy_DEG.txt and 
+# Data/TregvsTconv_Thy_DEGnoco.txt and outputs a csv with results for each run, as well as a sticks plot for the top
 # pathways and an enrichment plot for the significant pathways
 # 
 # Revision History  :
 #
 # Date        Author      Num    Summary
 # 20211110    Susana      1      Created
+# 20240412    Susana      1      Updated
 # 
 #
 #**********************************************************************
@@ -36,22 +37,25 @@ library(readr)
 
 #get functions to perform GSEA
 source("Functions/FunctionsForGSEA.R")
-source("Functions/fgseaMsigDb.R")
+
+#v7.4
+#source("Functions/fgseaMsigDb.R")
+
+
+
 source("Functions/GenerateFolderTree.R")
 
 
 
 
-# _________________________________ RUN FGSEA on  expressionDataset_NoCutoff
-
-#substitute the inout fot the appropriate table. It's important that the IDs are HGNC
+# _________________________________ RUN FGSEA on  TregvsTconv_Thy_DEGnoco
 
 
 # --------- generate folder structure
 basedir<-getwd()
 
 #give this the name of the input file
-nametransition<-"expressionDataset_NoCutoff"
+nametransition<-"TregvsTconv_Thy_DEGnoco"
 
 #generates the folder strcture for the output
 generatefolderstructure(nametransition)
@@ -61,34 +65,32 @@ setwd(basedir)
 
 # -----------get and prepare test data
 
-expressionDataset_NoCutoff <- read_table("expressionDataset_NoCutoff.txt")
-expressionDataset_NoCutoff<-data.frame(expressionDataset_NoCutoff$ensembl_gene_id, expressionDataset_NoCutoff$hgnc_symbol, expressionDataset_NoCutoff$logFC)
-names(expressionDataset_NoCutoff)<-c("ensembl_gene_id", "hgnc_symbol", "logFC")
+TregvsTconv_Thy_DEGnoco <- read_table("Data/TregvsTconv_Thy_DEGnoco.txt")
+TregvsTconv_Thy_DEGnoco<-data.frame(TregvsTconv_Thy_DEGnoco$ensembl_gene_id, TregvsTconv_Thy_DEGnoco$hgnc_symbol, TregvsTconv_Thy_DEGnoco$logFC)
+names(TregvsTconv_Thy_DEGnoco)<-c("ensembl_gene_id", "hgnc_symbol", "logFC")
 
 #get just the data for the task - genes and logFC
-expressionDataset_NoCutoff<-data.frame(expressionDataset_NoCutoff$hgnc_symbol,expressionDataset_NoCutoff$logFC)
-names(expressionDataset_NoCutoff)<-c("hgnc_symbol", "logFC")
+TregvsTconv_Thy_DEGnoco<-data.frame(TregvsTconv_Thy_DEGnoco$hgnc_symbol,TregvsTconv_Thy_DEGnoco$logFC)
+names(TregvsTconv_Thy_DEGnoco)<-c("hgnc_symbol", "logFC")
 
 #arrange data for fgsea We need a named list with the fold change values arrange from highest
 #to lowest
-expressionDataset_NoCutoff<-arrange(expressionDataset_NoCutoff, desc(expressionDataset_NoCutoff$logFC))
-expressionDataset_NoCutoff <- deframe(expressionDataset_NoCutoff)
+TregvsTconv_Thy_DEGnoco<-arrange(TregvsTconv_Thy_DEGnoco, desc(TregvsTconv_Thy_DEGnoco$logFC))
+TregvsTconv_Thy_DEGnoco <- deframe(TregvsTconv_Thy_DEGnoco)
 
 
-runGSEAonTest(expressionDataset_NoCutoff, nametransition)
+runGSEAonTest(TregvsTconv_Thy_DEGnoco, nametransition)
 
 
 
-# _________________________________ RUN FGSEA on  expressionDataset
-
-#substitute the inout fot the appropriate table. It's important that the IDs are HGNC
+# _________________________________ RUN FGSEA on  TregvsTconv_Thy_DEG
 
 
 # --------- generate folder structure
 basedir<-getwd()
 
 #give this the name of the input file
-nametransition<-"expressionDataset"
+nametransition<-"TregvsTconv_Thy_DEG"
 
 #generates the folder strcture for the output
 generatefolderstructure(nametransition)
@@ -98,18 +100,18 @@ setwd(basedir)
 
 # -----------get and prepare test data
 
-expressionDataset<- read_table2("Data/expressionDataset.txt")
-expressionDataset<-data.frame(expressionDataset$ensembl_gene_id, expressionDataset$hgnc_symbol, expressionDataset$logFC)
-names(expressionDataset)<-c("ensembl_gene_id", "hgnc_symbol", "logFC")
+TregvsTconv_Thy_DEG<- read_table2("Data/TregvsTconv_Thy_DEG.txt")
+TregvsTconv_Thy_DEG<-data.frame(TregvsTconv_Thy_DEG$ensembl_gene_id, TregvsTconv_Thy_DEG$hgnc_symbol, TregvsTconv_Thy_DEG$logFC)
+names(TregvsTconv_Thy_DEG)<-c("ensembl_gene_id", "hgnc_symbol", "logFC")
 
 #get just the data for the task - genes and logFC
-expressionDataset<-data.frame(expressionDataset$hgnc_symbol,expressionDataset$logFC)
-names(expressionDataset)<-c("hgnc_symbol", "logFC")
+TregvsTconv_Thy_DEG<-data.frame(TregvsTconv_Thy_DEG$hgnc_symbol,TregvsTconv_Thy_DEG$logFC)
+names(TregvsTconv_Thy_DEG)<-c("hgnc_symbol", "logFC")
 
 #arrange data for fgsea We need a named list with the fold change values arrange from highest
 #to lowest
-expressionDataset<-arrange(expressionDataset, desc(expressionDataset$logFC))
-expressionDataset <- deframe(expressionDataset)
+TregvsTconv_Thy_DEG<-arrange(TregvsTconv_Thy_DEG, desc(TregvsTconv_Thy_DEG$logFC))
+TregvsTconv_Thy_DEG <- deframe(TregvsTconv_Thy_DEG)
 
 
-runGSEAonTest(expressionDataset, nametransition)
+runGSEAonTest(TregvsTconv_Thy_DEG, nametransition)

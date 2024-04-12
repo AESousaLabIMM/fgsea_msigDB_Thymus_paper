@@ -8,8 +8,8 @@
 #
 # Date created      : 20211110
 #
-# Summary           : Creates a heatmap based upon the Normalized Enrichment Score for the Hallmark/expressionDataset
-# fgsea results and Hallmark/expressionDataset_NoCutoff fgsea results. 
+# Summary           : Creates a heatmap based upon the Normalized Enrichment Score for the Hallmark/TregvsTconv_Thy_DEG
+# fgsea results and Hallmark/TregvsTconv_Thy_DEGnoco fgsea results. 
 #
 # 
 #
@@ -17,6 +17,7 @@
 #
 # Date        Author      Num    Summary
 # 20211110    Susana      1      Created
+# 20240412    Susana      1      Updated
 # 
 #
 #**********************************************************************
@@ -31,44 +32,44 @@ library(readr)
 
 
 
-# _____________HEATMAP for  HallmarkexpressionDataset
+# _____________HEATMAP for  HallmarkTregvsTconv_Thy_DEG
 
 
 #import fgsea table and process for heatmap 
-table <-  read_csv("expressionDataset/Hallmark/HallmarkexpressionDatasettable.csv")
+table <-  read_csv("TregvsTconv_Thy_DEG/Hallmark/HallmarkTregvsTconv_Thy_DEGtable.csv")
 
 
 #process table for heatmap
 tableforheatmap<-processgenesleadingedge(table)
 
 #save table
-write.table(tableforheatmap, file = "expressionDataset/Hallmark/HallmarkexpressionDatasetTableHeatmap.csv", sep = ",")
+write.table(tableforheatmap, file = "TregvsTconv_Thy_DEG/Hallmark/HallmarkTregvsTconv_Thy_DEGTableHeatmap.csv", sep = ",")
 
 
 #create heatmap
-output<-generateHeatmapCSVfgsea(tableforheatmap, "expressionDataset/Hallmark/HallmarkexpressionDatasetHeatmap")
+output<-generateHeatmapCSVfgsea(tableforheatmap, "TregvsTconv_Thy_DEG/Hallmark/HallmarkTregvsTconv_Thy_DEGHeatmap")
 
 
 
 
 
 
-# _____________HEATMAP for  HallmarkexpressionDataset_NoCutoff
+# _____________HEATMAP for  HallmarkTregvsTconv_Thy_DEGnoco
 
 
 #import fgsea table and process for heatmap 
-table <-  read_csv("expressionDataset_NoCutoff/Hallmark/HallmarkexpressionDataset_NoCutofftable.csv")
+table <-  read_csv("TregvsTconv_Thy_DEGnoco/Hallmark/HallmarkTregvsTconv_Thy_DEGnocotable.csv")
 
 
 #process table for heatmap
 tableforheatmap<-processgenesleadingedge(table)
 
 #save table
-write.table(tableforheatmap, file = "expressionDataset_NoCutoff/Hallmark/HallmarkexpressionDataset_NoCutoffTableHeatmap.csv", sep = ",")
+write.table(tableforheatmap, file = "TregvsTconv_Thy_DEGnoco/Hallmark/HallmarkTregvsTconv_Thy_DEGnocoTableHeatmap.csv", sep = ",")
 
 
 #create heatmap
-output<-generateHeatmapCSVfgsea(tableforheatmap, "expressionDataset_NoCutoff/Hallmark/HallmarkexpressionDataset_NoCutoffHeatmap")
+output<-generateHeatmapCSVfgsea(tableforheatmap, "TregvsTconv_Thy_DEGnoco/Hallmark/HallmarkTregvsTconv_Thy_DEGnocoHeatmap")
 
 
 

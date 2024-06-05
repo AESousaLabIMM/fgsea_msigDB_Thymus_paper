@@ -39,7 +39,7 @@ library(readr)
 source("Functions/FunctionsForGSEA.R")
 
 #v7.4
-#source("Functions/fgseaMsigDb.R")
+source("Functions/fgseaMsigDb.R")
 
 
 
